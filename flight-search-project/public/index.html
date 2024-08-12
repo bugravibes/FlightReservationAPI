@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Testing</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+
+        a {
+            color: white;
+            text-decoration: none;
+        }
+
+        a:visited {
+            color: white;
+        }
+
+        ul {
+            list-style-type: none;
+            margin: 0 auto;
+            padding: 0;
+            text-align: center;
+        }
+
+        li {
+            margin: 10px 0;
+        }
+
+        .glass-item {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 15px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .glass-item:hover {
+            transform: translateY(-5px);
+        }
+    </style>
+</head>
+<body>
+<h1>Service Testing</h1>
+<ul>
+    <li class="glass-item"><a href="auth.html">Authentication</a></li>
+    <li class="glass-item"><a href="flight-search.html">Flight Search</a></li>
+    <li class="glass-item"><a href="reservation-create.html">Create Reservation</a></li>
+    <li class="glass-item"><a href="ticketing.html">Ticket Reservation</a></li>
+    <li class="glass-item"><a href="cancellation.html">Cancel Reservation</a></li>
+    <li class="glass-item"><a href="reservation-search.html">Search Reservation</a></li>
+</ul>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authentication</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<h1>Authentication</h1>
+<form class="glass-container" id="auth-form">
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" value="demo">
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" value="demo">
+
+    <button type="submit">Login</button>
+</form>
+
+<h2>Result</h2>
+<div id="result"></div>
+
+<script>
+    document.getElementById('auth-form').addEventListener('submit', async function(event) {
+        event.preventDefault();
+
+        const requestBody = {
+            username: document.getElementById('username').value,
+            password: document.getElementById('password').value
+        };
+
+        try {
+            const response = await fetch('/api/auth/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(requestBody)
+            });
+
+            const result = await response.json();
+            document.getElementById('result').innerText = JSON.stringify(result, null, 2);
+        } catch (error) {
+            document.getElementById('result').innerText = `Error: ${error}`;
+        }
+    });
+</script>
+</body>
+</html>

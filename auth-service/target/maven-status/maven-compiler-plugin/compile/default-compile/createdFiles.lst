@@ -1,0 +1,12 @@
+com\example\entity\User.class
+com\example\controller\AuthController.class
+com\example\entity\Role.class
+com\example\service\RoleService.class
+com\example\config\SecurityConfig.class
+com\example\repository\RoleRepository.class
+com\example\config\WebConfig.class
+com\example\controller\TestController.class
+com\example\repository\UserRepository.class
+com\example\App.class
+com\example\config\RequestResponseLoggingFilter.class
+com\example\service\UserService.class

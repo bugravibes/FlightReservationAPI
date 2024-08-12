@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ticketing</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<h1>Ticketing</h1>
+<form class="glass-container" id="ticketing-form">
+    <label for="client_id">Client ID:</label>
+    <input type="text" id="client_id" name="client_id" value="client123">
+
+    <label for="client_password">Client Password:</label>
+    <input type="password" id="client_password" name="client_password" value="secret456">
+
+    <label for="reservation_id">Reservation ID:</label>
+    <input type="text" id="reservation_id" name="reservation_id" value="RES123456789">
+
+    <label for="transaction_id">Transaction ID:</label>
+    <input type="text" id="transaction_id" name="transaction_id" value="TX123456789">
+
+    <label for="amount">Amount:</label>
+    <input type="text" id="amount" name="amount" value="350.00">
+
+    <label for="currency">Currency:</label>
+    <input type="text" id="currency" name="currency" value="USD">
+
+    <label for="payment_method">Payment Method:</label>
+    <input type="text" id="payment_method" name="payment_method" value="credit_card">
+
+    <button type="submit">Ticket Reservation</button>
+</form>
+
+<h2>Result</h2>
+<div id="ticketing-result"></div>
+
+<script>
+    document.getElementById('ticketing-form').addEventListener('submit', async function(event) {
+        event.preventDefault();
+
+        const requestBody = {
+            ticketing_request: {
+                client_id: document.getElementById('client_id').value,
+                client_password: document.getElementById('client_password').value,
+                reservation_id: document.getElementById('reservation_id').value,
+                payment_confirmation: {
+                    transaction_id: document.getElementById('transaction_id').value,
+                    amount: document.getElementById('amount').value,
+                    currency: document.getElementById('currency').value,
+                    payment_method: document.getElementById('payment_method').value
+                }
+            }
+        };
+
+        try {
+            const response = await fetch('/reservations/ticket', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(requestBody)
+            });
+
+            const result = await response.json();
+            document.getElementById('ticketing-result').innerText = JSON.stringify(result, null, 2);
+        } catch (error) {
+            document.getElementById('ticketing-result').innerText = `Error: ${error}`;
+        }
+    });
+</script>
+</body>
+</html>

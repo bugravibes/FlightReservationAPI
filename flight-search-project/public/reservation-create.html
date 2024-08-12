@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Reservation</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<h1>Create Reservation</h1>
+<form class="glass-container" id="reservation-form">
+    <h3>Client Info</h3>
+    <label for="client_id">Client ID:</label>
+    <input type="text" id="client_id" name="client_id" value="client123">
+
+    <label for="client_password">Client Password:</label>
+    <input type="password" id="client_password" name="client_password" value="secret456">
+
+    <h3>Flight Info</h3>
+    <label for="flight_number">Flight Number:</label>
+    <input type="text" id="flight_number" name="flight_number" value="AA123">
+
+    <label for="airline">Airline:</label>
+    <input type="text" id="airline" name="airline" value="American Airlines">
+
+    <label for="departure_airport">Departure Airport:</label>
+    <input type="text" id="departure_airport" name="departure_airport" value="JFK">
+
+    <label for="departure_city">Departure City:</label>
+    <input type="text" id="departure_city" name="departure_city" value="New York">
+
+    <label for="arrival_airport">Arrival Airport:</label>
+    <input type="text" id="arrival_airport" name="arrival_airport" value="LAX">
+
+    <label for="arrival_city">Arrival City:</label>
+    <input type="text" id="arrival_city" name="arrival_city" value="Los Angeles">
+
+    <label for="departure_time">Departure Time:</label>
+    <input type="text" id="departure_time" name="departure_time" value="2024-07-15T08:00:00">
+
+    <label for="arrival_time">Arrival Time:</label>
+    <input type="text" id="arrival_time" name="arrival_time" value="2024-07-15T11:00:00">
+
+    <label for="class">Class:</label>
+    <input type="text" id="class" name="class" value="Economy">
+
+    <h3>Passenger Info</h3>
+    <div id="passengers">
+        <div class="passenger">
+            <label for="first_name">First Name:</label>
+            <input type="text" id="first_name" name="first_name" value="John">
+
+            <label for="last_name">Last Name:</label>
+            <input type="text" id="last_name" name="last_name" value="Doe">
+
+            <label for="dob">Date of Birth:</label>
+            <input type="text" id="dob" name="dob" value="1990-05-15">
+
+            <label for="passport_number">Passport Number:</label>
+            <input type="text" id="passport_number" name="passport_number" value="X12345678">
+
+            <label for="nationality">Nationality:</label>
+            <input type="text" id="nationality" name="nationality" value="US">
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" value="john.doe@example.com">
+
+            <label for="phone">Phone:</label>
+            <input type="text" id="phone" name="phone" value="+1234567890">
+        </div>
+    </div>
+    <!-- Add more passengers as needed -->
+    <button type="button" onclick="addPassenger()">Add Passenger</button>
+
+    <h3>Payment Info</h3>
+    <label for="method">Method:</label>
+    <input type="text" id="method" name="method" value="credit_card">
+
+    <label for="card_number">Card Number:</label>
+    <input type="text" id="card_number" name="card_number" value="4111111111111111">
+
+    <label for="expiry_date">Expiry Date:</label>
+    <input type="text" id="expiry_date" name="expiry_date" value="12/25">
+
+    <label for="cvv">CVV:</label>
+    <input type="text" id="cvv" name="cvv" value="123">
+
+    <label for="cardholder_name">Cardholder Name:</label>
+    <input type="text" id="cardholder_name" name="cardholder_name" value="John Doe">
+
+    <label for="billing_street">Street:</label>
+    <input type="text" id="billing_street" name="billing_street" value="123 Main St">
+
+    <label for="billing_city">City:</label>
+    <input type="text" id="billing_city" name="billing_city" value="New York">
+
+    <label for="billing_state">State:</label>
+    <input type="text" id="billing_state" name="billing_state" value="NY">
+
+    <label for="billing_postal_code">Postal Code:</label>
+    <input type="text" id="billing_postal_code" name="billing_postal_code" value="10001">
+
+    <label for="billing_country">Country:</label>
+    <input type="text" id="billing_country" name="billing_country" value="US">
+
+    <h3>Contact Info</h3>
+    <label for="contact_email">Email:</label>
+    <input type="email" id="contact_email" name="contact_email" value="john.doe@example.com">
+
+    <label for="contact_phone">Phone:</label>
+    <input type="text" id="contact_phone" name="contact_phone" value="+1234567890">
+
+    <button type="submit">Create Reservation</button>
+</form>
+
+<h2>Result</h2>
+<div id="reservation-result"></div>
+
+<script>
+    function addPassenger() {
+        const passengerDiv = document.createElement('div');
+        passengerDiv.className = 'passenger';
+        passengerDiv.innerHTML = `
+            <label for="first_name">First Name:</label>
+            <input type="text" name="first_name" value="">
+
+            <label for="last_name">Last Name:</label>
+            <input type="text" name="last_name" value="">
+
+            <label for="dob">Date of Birth:</label>
+            <input type="text" name="dob" value="">
+
+            <label for="passport_number">Passport Number:</label>
+            <input type="text" name="passport_number" value="">
+
+            <label for="nationality">Nationality:</label>
+            <input type="text" name="nationality" value="">
+
+            <label for="email">Email:</label>
+            <input type="email" name="email" value="">
+
+            <label for="phone">Phone:</label>
+            <input type="text" name="phone" value="">
+        `;
+        document.getElementById('passengers').appendChild(passengerDiv);
+    }
+
+    document.getElementById('reservation-form').addEventListener('submit', async function(event) {
+        event.preventDefault();
+
+        const passengers = Array.from(document.querySelectorAll('.passenger')).map(passenger => {
+            return {
+                first_name: passenger.querySelector('input[name="first_name"]').value,
+                last_name: passenger.querySelector('input[name="last_name"]').value,
+                dob: passenger.querySelector('input[name="dob"]').value,
+                passport_number: passenger.querySelector('input[name="passport_number"]').value,
+                nationality: passenger.querySelector('input[name="nationality"]').value,
+                contact_info: {
+                    email: passenger.querySelector('input[name="email"]').value,
+                    phone: passenger.querySelector('input[name="phone"]').value
+                }
+            };
+        });
+
+        const requestBody = {
+            reservation_request: {
+                client_id: document.getElementById('client_id').value,
+                client_password: document.getElementById('client_password').value,
+                flight: {
+                    flight_number: document.getElementById('flight_number').value,
+                    airline: document.getElementById('airline').value,
+                    departure: {
+                        airport: document.getElementById('departure_airport').value,
+                        city: document.getElementById('departure_city').value,
+                        time: document.getElementById('departure_time').value
+                    },
+                    arrival: {
+                        airport: document.getElementById('arrival_airport').value,
+                        city: document.getElementById('arrival_city').value,
+                        time: document.getElementById('arrival_time').value
+                    },
+                    class: document.getElementById('class').value
+                },
+                passengers: passengers,
+                payment: {
+                    method: document.getElementById('method').value,
+                    details: {
+                        card_number: document.getElementById('card_number').value,
+                        expiry_date: document.getElementById('expiry_date').value,
+                        cvv: document.getElementById('cvv').value,
+                        cardholder_name: document.getElementById('cardholder_name').value,
+                        billing_address: {
+                            street: document.getElementById('billing_street').value,
+                            city: document.getElementById('billing_city').value,
+                            state: document.getElementById('billing_state').value,
+                            postal_code: document.getElementById('billing_postal_code').value,
+                            country: document.getElementById('billing_country').value
+                        }
+                    }
+                },
+                contact_info: {
+                    email: document.getElementById('contact_email').value,
+                    phone: document.getElementById('contact_phone').value
+                }
+            }
+        };
+
+        try {
+            const response = await fetch('/api/reservations/create', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(requestBody)
+            });
+
+            const result = await response.json();
+            document.getElementById('reservation-result').innerText = JSON.stringify(result, null, 2);
+        } catch (error) {
+            document.getElementById('reservation-result').innerText = `Error: ${error}`;
+        }
+    });
+</script>
+</body>
+</html>

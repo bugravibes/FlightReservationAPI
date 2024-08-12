@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Flights</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<h1>Search Flights</h1>
+<form class="glass-container" id="flight-search-form">
+    <label for="client_id">Client ID:</label>
+    <input type="text" id="client_id" name="client_id" value="demo">
+
+    <label for="client_password">Client Password:</label>
+    <input type="password" id="client_password" name="client_password" value="demo">
+
+    <label for="departure_airport">Departure Airport:</label>
+    <input type="text" id="departure_airport" name="departure_airport" value="JFK">
+
+    <label for="departure_city">Departure City:</label>
+    <input type="text" id="departure_city" name="departure_city" value="New York">
+
+    <label for="arrival_airport">Arrival Airport:</label>
+    <input type="text" id="arrival_airport" name="arrival_airport" value="LAX">
+
+    <label for="arrival_city">Arrival City:</label>
+    <input type="text" id="arrival_city" name="arrival_city" value="Los Angeles">
+
+    <label for="departure_date">Departure Date:</label>
+    <input type="text" id="departure_date" name="departure_date" value="2024-07-15">
+
+    <label for="class">Class:</label>
+    <input type="text" id="class" name="class" value="Economy">
+
+    <label for="adults">Adults:</label>
+    <input type="number" id="adults" name="adults" value="1">
+
+    <label for="children">Children:</label>
+    <input type="number" id="children" name="children" value="0">
+
+    <label for="infants">Infants:</label>
+    <input type="number" id="infants" name="infants" value="0">
+
+    <button type="submit">Search</button>
+</form>
+
+<h2>Results</h2>
+<div id="results"></div>
+
+<script>
+    document.getElementById('flight-search-form').addEventListener('submit', async function(event) {
+        event.preventDefault();
+
+        const requestBody = {
+            search_request: {
+                client_id: document.getElementById('client_id').value,
+                client_password: document.getElementById('client_password').value,
+                departure: {
+                    airport: document.getElementById('departure_airport').value,
+                    city: document.getElementById('departure_city').value
+                },
+                arrival: {
+                    airport: document.getElementById('arrival_airport').value,
+                    city: document.getElementById('arrival_city').value
+                },
+                departure_date: document.getElementById('departure_date').value,
+                passengers: {
+                    adults: document.getElementById('adults').value,
+                    children: document.getElementById('children').value,
+                    infants: document.getElementById('infants').value
+                },
+                class: document.getElementById('class').value
+            }
+        };
+
+        try {
+            const response = await fetch('/api/flights/search', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(requestBody)
+            });
+
+            const result = await response.json();
+            document.getElementById('results').innerText = JSON.stringify(result, null, 2);
+        } catch (error) {
+            document.getElementById('results').innerText = `Error: ${error}`;
+        }
+    });
+</script>
+</body>
+</html>
