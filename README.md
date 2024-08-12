@@ -1,4 +1,4 @@
-#Flight Reservation Services - RESTful API
+Flight Reservation Services - RESTful API
 Welcome to the Flight Reservation Services RESTful API! This project represents a sophisticated, microservices-based architecture designed to streamline and enhance the flight reservation experience. Developed with the latest technologies and industry standards, this API provides a robust and secure solution for managing flight bookings, cancellations, ticketing, and more.
 
 🚀 Project Overview
@@ -66,10 +66,4 @@ Real-time log monitoring and analysis are powered by the ELK Stack (Elasticsearc
 💻 Getting Started
 To get started with this project, clone the repository, and follow the instructions in the docker-compose.yml file to bring up all services using Docker. Make sure you have Docker and Docker Compose installed on your machine.
 
-Feel free to modify and adjust the text to better suit your needs!
-
-
-
-
-
-
+This should give your README a more structured and visually appealing format with clear sections and headings!
